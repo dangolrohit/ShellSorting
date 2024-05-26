@@ -88,3 +88,9 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
+#credit {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+}

@@ -5,6 +5,8 @@ let i = 0;
 let j = 0;
 let array = [];
 let sortingInProgress = false;
+let credit = document.getElementById("credit");
+credit.style.display = "none";
 
 function inputFields() {
   const arraySize = document.getElementById("arraySize").value;
@@ -88,7 +90,8 @@ function sortNextStep() {
   } else {
     sortingInProgress = false;
     document.getElementById("nextButton").style.display = "none";
-    sortingStepsDiv.innerHTML = "The sorting is Completed";
+    sortingStepsDiv.innerHTML = "The sorting is Completed ";
+    credit.style.display = "inline-block";
   }
 }
 const arrayFields = document.getElementById("arrayInputFields");
