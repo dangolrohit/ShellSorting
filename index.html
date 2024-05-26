@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shell Sorting</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    
-    <script src="./main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shell Sort Visualization</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shell Sort</h1>
+      <h3 id="header"></h3>
+
+      <div class="input-section">
+        <label for="arraySize">Array Size:</label>
+
+        <input type="number" id="arraySize" min="1" required />
+
+        <button onclick="inputFields()" id="createArrayButton">
+          Create Array
+        </button>
+      </div>
+
+      <div id="arrayInputFields" class="array-input-fields"></div>
+
+      <button id="sortButton" onclick="sortArray()" style="display: none">
+        Sort Array
+      </button>
+
+      <div style="display: none">
+        <h3>Sorted Array:</h3>
+        <p id="sortedArray"></p>
+      </div>
+
+      <div style="display: none">
+        <h3>Sorting Steps:</h3>
+        <div id="sortingSteps"></div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
 </html>

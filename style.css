@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.input-section {
+  margin-bottom: 20px;
+}
+
+.input-section label {
+  margin-right: 10px;
+}
+
+.input-section input[type="number"] {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 60px;
+  margin-right: 10px;
+}
+
+.input-section button,
+#sortButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #5cb85c;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.input-section button:hover,
+#sortButton:hover {
+  background-color: #4cae4c;
+}
+
+#sortedArray {
+  font-weight: bold;
+}
+
+#sortingSteps {
+  margin-top: 20px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.inputClass {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+}
