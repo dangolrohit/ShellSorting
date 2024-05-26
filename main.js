@@ -1,7 +1,10 @@
 let currentStep = 0;
 let steps = [];
-let header = document.getElementById("header");
-let sortButton = document.getElementById("sortButton");
+let gap = 0;
+let i = 0;
+let j = 0;
+let array = [];
+let sortingInProgress = false;
 
 function inputFields() {
   const arraySize = document.getElementById("arraySize").value;
@@ -11,36 +14,18 @@ function inputFields() {
   if (arraySize > 1) {
     for (let i = 0; i < arraySize; i++) {
       const inputField = document.createElement("input");
-      inputField.type = "text";
+      inputField.type = "number";
       inputField.id = `arrayValue${i}`;
       inputField.className = "inputClass";
       inputField.required = true;
       arrayInputFields.appendChild(inputField);
     }
-
+    document.getElementById("input-section").style.display = "none";
     document.getElementById("sortButton").style.display = "inline-block";
-    header.innerHTML = " ";
+    document.getElementById("header").innerHTML = "Enter Array Elements";
   } else {
-    header.innerHTML = "Enter a valid number.";
-    sortButton.style.display = "none";
+    document.getElementById("header").innerHTML = "Enter a valid number.";
   }
-}
-
-function arraySorting(arr) {
-  let n = arr.length;
-  steps = [];
-  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-    for (let i = gap; i < n; i++) {
-      let temp = arr[i];
-      let j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-        arr[j] = arr[j - gap];
-        steps.push(arr.slice());
-      }
-      arr[j] = temp;
-    }
-  }
-  return arr;
 }
 
 function arrays(size) {
@@ -51,23 +36,67 @@ function arrays(size) {
   return arr;
 }
 
+function arraySorting(arr) {
+  document.getElementById("header").innerHTML = "";
+
+  sortingInProgress = true;
+  array = arr;
+  currentStep = 0;
+  gap = Math.floor(array.length / 2);
+  i = gap;
+  j = i;
+  steps = [array.slice()];
+  document.getElementById("nextButton").style.display = "inline-block";
+  displayNextStep();
+}
+
+const sortingStepsDiv = document.getElementById("sortingSteps");
+sortingStepsDiv.style.display = "none";
 function displayNextStep() {
-  const sortingStepsDiv = document.getElementById("sortingSteps");
   sortingStepsDiv.innerHTML = "";
+  sortingStepsDiv.style.display = "inline-block";
 
   if (currentStep < steps.length) {
     const stepElement = document.createElement("div");
-    stepElement.textContent = `Step ${currentStep + 1}: ${steps[
-      currentStep
-    ].join(", ")}`;
+    stepElement.textContent = ` ${steps[currentStep].join(", ")}`;
     sortingStepsDiv.appendChild(stepElement);
     currentStep++;
+  } else if (sortingInProgress) {
+    sortNextStep();
   }
 }
 
+function sortNextStep() {
+  if (gap > 0) {
+    if (i < array.length) {
+      if (j >= gap && array[j - gap] > array[j]) {
+        let temp = array[j];
+        array[j] = array[j - gap];
+        array[j - gap] = temp;
+        steps.push(array.slice());
+        j -= gap;
+      } else {
+        i++;
+        j = i;
+      }
+    } else {
+      gap = Math.floor(gap / 2);
+      i = gap;
+      j = i;
+    }
+    displayNextStep();
+  } else {
+    sortingInProgress = false;
+    document.getElementById("nextButton").style.display = "none";
+    sortingStepsDiv.innerHTML = "The sorting is Completed";
+  }
+}
+const arrayFields = document.getElementById("arrayInputFields");
+const sortButton = document.getElementById("sortButton");
 function sortArray() {
   const arraySize = document.getElementById("arraySize").value;
-  let array = arrays(arraySize);
-  array = arraySorting(array);
-  console.log(array);
+  array = arrays(arraySize);
+  arraySorting(array);
+  arrayFields.style.display = "none";
+  sortButton.style.display = "none";
 }
