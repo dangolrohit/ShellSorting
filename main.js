@@ -99,10 +99,21 @@ function sortNextStep() {
 }
 const arrayFields = document.getElementById("arrayInputFields");
 const sortButton = document.getElementById("sortButton");
-function sortArray() {
-  const arraySize = document.getElementById("arraySize").value;
-  array = arrays(arraySize);
-  arraySorting(array);
-  arrayFields.style.display = "none";
-  sortButton.style.display = "none";
+for (let i = 0; i < arraySize; i++) {
+    const value = document.getElementById(`arrayValue${i}`).value;
+    if (isNaN(value) || value === "") {
+      allValid = false;
+      break;
+    } else {
+      array.push(parseInt(value));
+    }
+  }
+
+  if (allValid) {
+    arraySorting(array);
+    arrayFields.style.display = "none";
+    sortButton.style.display = "none";
+  } else {
+    document.getElementById("header").innerHTML = "Enter valid numbers";
+  }
 }
