@@ -99,7 +99,12 @@ function sortNextStep() {
 }
 const arrayFields = document.getElementById("arrayInputFields");
 const sortButton = document.getElementById("sortButton");
-for (let i = 0; i < arraySize; i++) {
+function sortArray() {
+  const arraySize = document.getElementById("arraySize").value;
+  let allValid = true;
+  let array = [];
+
+  for (let i = 0; i < arraySize; i++) {
     const value = document.getElementById(`arrayValue${i}`).value;
     if (isNaN(value) || value === "") {
       allValid = false;
