@@ -7,6 +7,7 @@ let array = [];
 let sortingInProgress = false;
 let credit = document.getElementById("credit");
 credit.style.display = "none";
+let inputClass = document.getElementsByClassName("inputClass");
 
 function inputFields() {
   const arraySize = document.getElementById("arraySize").value;
@@ -22,6 +23,7 @@ function inputFields() {
       inputField.required = true;
       arrayInputFields.appendChild(inputField);
     }
+
     document.getElementById("input-section").style.display = "none";
     document.getElementById("sortButton").style.display = "inline-block";
     document.getElementById("header").innerHTML = "Enter Array Elements";
@@ -29,7 +31,6 @@ function inputFields() {
     document.getElementById("header").innerHTML = "Enter a valid number.";
   }
 }
-
 function arrays(size) {
   let arr = [];
   for (let i = 0; i < size; i++) {
@@ -37,10 +38,8 @@ function arrays(size) {
   }
   return arr;
 }
-
 function arraySorting(arr) {
   document.getElementById("header").innerHTML = "";
-
   sortingInProgress = true;
   array = arr;
   currentStep = 0;
@@ -51,16 +50,17 @@ function arraySorting(arr) {
   document.getElementById("nextButton").style.display = "inline-block";
   displayNextStep();
 }
-
 const sortingStepsDiv = document.getElementById("sortingSteps");
 sortingStepsDiv.style.display = "none";
+
 function displayNextStep() {
-  sortingStepsDiv.innerHTML = "";
   sortingStepsDiv.style.display = "inline-block";
 
   if (currentStep < steps.length) {
     const stepElement = document.createElement("div");
-    stepElement.textContent = ` ${steps[currentStep].join(", ")}`;
+    stepElement.style.textAlign = "center";
+    stepElement.style.padding = "7.5px 0px";
+    stepElement.textContent = `${steps[currentStep].join(", ")}`;
     sortingStepsDiv.appendChild(stepElement);
     currentStep++;
   } else if (sortingInProgress) {
@@ -90,7 +90,10 @@ function sortNextStep() {
   } else {
     sortingInProgress = false;
     document.getElementById("nextButton").style.display = "none";
-    sortingStepsDiv.innerHTML = "The sorting is Completed ";
+    const completedElement = document.createElement("div");
+    completedElement.textContent = "The sorting is Completed";
+    sortingStepsDiv.appendChild(completedElement);
+    completedElement.style.fontSize = "12px";
     credit.style.display = "inline-block";
   }
 }
